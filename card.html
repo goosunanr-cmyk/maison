@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  
+  <!-- 网页标题（也会作为微信分享标题） -->
+  <title>💍 李明 & 王芳 的婚礼邀请</title>
+
+  <!-- 微信分享关键：Open Graph 协议 -->
+  <meta property="og:title" content="诚邀您见证我们的幸福时刻 ❤️" />
+  <meta property="og:description" content="2026年5月20日 · 上海外滩华尔道夫酒店 · 敬备喜宴，恭候光临" />
+  <meta property="og:image" content="https://your-domain.com/wedding-card.jpg" />
+  <meta property="og:url" content="https://your-domain.com/wedding-invite" />
+  <meta property="og:type" content="website" />
+
+  <!-- 微信 JS-SDK 兼容（可选但推荐） -->
+  <meta name="referrer" content="no-referrer" />
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: linear-gradient(135deg, #fff9f9, #f0f4ff);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #333;
+    }
+    .card {
+      width: 90%;
+      max-width: 500px;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      padding: 40px 30px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .card::before {
+      content: "";
+      position: absolute;
+      top: -50px;
+      right: -50px;
+      width: 150px;
+      height: 150px;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="100">❤</text></svg>') no-repeat center;
+      opacity: 0.05;
+    }
+    h1 {
+      font-size: 28px;
+      margin: 20px 0;
+      color: #d46b8a;
+    }
+    p {
+      font-size: 16px;
+      line-height: 1.6;
+      margin: 15px 0;
+    }
+    .date {
+      font-weight: bold;
+      color: #e75480;
+      font-size: 18px;
+    }
+    .footer {
+      margin-top: 30px;
+      font-size: 14px;
+      color: #999;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>💍 喜结良缘 💍</h1>
+    <p>我们怀着无比喜悦的心情<br/>诚挚邀请您参加我们的婚礼</p>
+    <p><strong>新郎：罗智信</strong><br/><strong>新娘：胡静雯</strong></p>
+    <p class="date">2026年5月20日（星期三） 中午12:00</p>
+    <p>📍 上海外滩华尔道夫酒店 · 宴会厅A</p>
+    <p>您的到来，是我们最大的荣幸 ❤️</p>
+    <div class="footer">点击右上角「…」→「发送给朋友」或「分享到朋友圈」</div>
+  </div>
+</body>
+</html>
