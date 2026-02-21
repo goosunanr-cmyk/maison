@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>家庭食谱 - iPhone预览</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .page-title {
+            color: white;
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .page-subtitle {
+            color: rgba(255,255,255,0.8);
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        /* iPhone手机壳 */
+        .phone-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .phone-frame {
+            position: relative;
+            width: 400px;
+            height: 869px;
+            background: #1a1a1a;
+            border-radius: 55px;
+            padding: 14px;
+            box-shadow: 0 50px 100px rgba(0,0,0,0.3);
+        }
+
+        .phone-bezel {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            border-radius: 40px;
+            overflow: hidden;
+        }
+
+        /* 状态栏 */
+        .status-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 54px;
+            background: #000;
+            z-index: 101;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            padding: 0 24px 8px;
+            color: white;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .status-time {
+            font-size: 15px;
+        }
+
+        .status-right {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .status-icon {
+            font-size: 14px;
+        }
+
+        /* 灵动岛 */
+        .dynamic-island {
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 126px;
+            height: 37px;
+            background: #000;
+            border-radius: 20px;
+            z-index: 102;
+        }
+
+        /* 前置摄像头 */
+        .front-camera {
+            position: absolute;
+            top: 18px;
+            left: 30px;
+            width: 12px;
+            height: 12px;
+            background: #1a1a1a;
+            border-radius: 50%;
+            z-index: 99;
+        }
+
+        /* 听筒 */
+        .speaker {
+            position: absolute;
+            top: 22px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 5px;
+            background: #1a1a1a;
+            border-radius: 3px;
+            z-index: 99;
+        }
+
+        /* 手机内容区域 */
+        .phone-content {
+            position: absolute;
+            top: 54px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #fff;
+        }
+
+        .phone-content iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* 侧边按钮 */
+        .phone-side-buttons {
+            position: absolute;
+        }
+
+        .side-btn {
+            position: absolute;
+            background: #333;
+            border-radius: 2px;
+        }
+
+        /* 左侧音量键 */
+        .volume-up {
+            left: -4px;
+            top: 180px;
+            width: 4px;
+            height: 35px;
+        }
+
+        .volume-down {
+            left: -4px;
+            top: 230px;
+            width: 4px;
+            height: 35px;
+        }
+
+        /* 右侧电源键 */
+        .power-button {
+            right: -4px;
+            top: 200px;
+            width: 4px;
+            height: 60px;
+        }
+
+        /* 提示信息 */
+        .tips {
+            margin-top: 30px;
+            color: rgba(255,255,255,0.7);
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .nav-btn {
+            padding: 12px 24px;
+            background: rgba(255,255,255,0.2);
+            border: 2px solid rgba(255,255,255,0.3);
+            color: white;
+            border-radius: 12px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+
+        .nav-btn.active {
+            background: white;
+            color: #667eea;
+            border-color: white;
+        }
+
+        /* 响应式 */
+        @media (max-width: 550px) {
+            .phone-frame {
+                width: 320px;
+                height: 695px;
+                border-radius: 45px;
+                padding: 11px;
+            }
+            
+            .phone-bezel {
+                border-radius: 36px;
+            }
+            
+            .phone-content iframe {
+                border-radius: 36px;
+            }
+            
+            .dynamic-island {
+                width: 105px;
+                height: 32px;
+                top: 11px;
+            }
+            
+            .page-title {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1 class="page-title">📱 家庭食谱 - iPhone预览</h1>
+    <p class="page-subtitle">在电脑浏览器中模拟手机体验</p>
+
+    <div class="nav-buttons">
+        <button class="nav-btn active" onclick="switchPage('index.html')">首页</button>
+        <button class="nav-btn" onclick="switchPage('history.html')">已点菜单</button>
+        <button class="nav-btn" onclick="switchPage('dish-management.html')">菜品管理</button>
+    </div>
+
+    <div class="phone-wrapper">
+        <div class="phone-frame">
+            <!-- 侧边按钮 -->
+            <div class="phone-side-buttons">
+                <div class="side-btn volume-up"></div>
+                <div class="side-btn volume-down"></div>
+                <div class="side-btn power-button"></div>
+            </div>
+            
+            <div class="phone-bezel">
+                <!-- 状态栏 -->
+                <div class="status-bar">
+                    <div class="status-time" id="statusTime">9:41</div>
+                    <div class="status-right">
+                        <i class="fas fa-signal status-icon"></i>
+                        <i class="fas fa-wifi status-icon"></i>
+                        <i class="fas fa-battery-full status-icon"></i>
+                    </div>
+                </div>
+                <!-- 前置摄像头 -->
+                <div class="front-camera"></div>
+                <!-- 听筒 -->
+                <div class="speaker"></div>
+                <!-- 灵动岛 -->
+                <div class="dynamic-island"></div>
+                
+                <!-- 内容区域 -->
+                <div class="phone-content">
+                    <iframe id="phoneFrame" src="index.html"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <p class="tips">💡 提示：点击上方按钮切换页面，在iframe中体验手机效果</p>
+
+    <script>
+        function updateTime() {
+            const now = new Date();
+            let hours = now.getHours();
+            let minutes = now.getMinutes();
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12;
+            hours = hours ? hours : 12;
+            document.getElementById('statusTime').textContent = hours + ':' + minutes;
+        }
+
+        updateTime();
+        setInterval(updateTime, 1000);
+
+        function switchPage(page) {
+            document.getElementById('phoneFrame').src = page;
+            
+            // 更新按钮状态
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>

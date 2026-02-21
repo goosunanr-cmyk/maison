@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>菜品详情 - 家肴集</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <header class="navbar">
+        <button class="back-btn" onclick="goBack()">
+            <i class="fas fa-arrow-left"></i>
+        </button>
+        <h1 class="app-title">菜品详情</h1>
+    </header>
+
+    <!-- 主内容区域 -->
+    <main class="detail-content">
+        <!-- 菜品大图 -->
+        <div class="dish-detail-image" id="dishDetailImage"></div>
+
+        <!-- 菜品信息 -->
+        <div class="dish-detail-info">
+            <div class="dish-detail-header">
+                <h1 class="dish-detail-name" id="dishDetailName"></h1>
+                <span class="dish-detail-category" id="dishDetailCategory"></span>
+            </div>
+
+            <!-- 标签 -->
+            <div class="dish-detail-tags" id="dishDetailTags"></div>
+
+            <!-- 快速操作按钮 -->
+            <div class="quick-actions">
+                <button class="action-btn" onclick="likeDish()">
+                    <i class="fas fa-heart"></i>
+                    <span>喜欢</span>
+                </button>
+                <button class="action-btn" onclick="shareDish()">
+                    <i class="fas fa-share-alt"></i>
+                    <span>分享</span>
+                </button>
+                <button class="action-btn" onclick="editDish()">
+                    <i class="fas fa-edit"></i>
+                    <span>编辑</span>
+                </button>
+            </div>
+
+            <!-- 分割线 -->
+            <div class="divider"></div>
+
+            <!-- 说明 -->
+            <div class="dish-description">
+                <h3 class="section-title">
+                    <i class="fas fa-info-circle"></i>
+                    菜品介绍
+                </h3>
+                <p class="description-text" id="dishDescription">
+                    这是一道美味的家常菜，非常适合家庭聚餐。口感丰富，营养均衡，是您厨房的好选择！
+                </p>
+            </div>
+
+            <!-- 推荐搭配 -->
+            <div class="suggestions">
+                <h3 class="section-title">
+                    <i class="fas fa-lightbulb"></i>
+                    推荐搭配
+                </h3>
+                <div class="suggestion-grid">
+                    <div class="suggestion-item">
+                        <i class="fas fa-bowl-rice"></i>
+                        <span>米饭</span>
+                    </div>
+                    <div class="suggestion-item">
+                        <i class="fas fa-wine-glass"></i>
+                        <span>汤品</span>
+                    </div>
+                    <div class="suggestion-item">
+                        <i class="fas fa-leaf"></i>
+                        <span>蔬菜</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Toast提示 -->
+    <div class="toast" id="toast"></div>
+
+    <script src="detail.js"></script>
+</body>
+</html>

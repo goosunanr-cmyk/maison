@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>家肴集</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        const SUPABASE_URL = 'https://holcjoihioqzjauoewbw.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhvbGNqb2loaW9xemphdW9ld2J3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE2NDkwNTksImV4cCI6MjA4NzIyNTA1OX0.XBnC9Vug155Dmf77CkwhOmwjaaEOA597J-OdMlohTlU';
+        window.db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        
+        function checkUserRole() {
+            const userRole = localStorage.getItem('userRole');
+            if (!userRole) {
+                window.location.href = 'role-select.html';
+            }
+        }
+        checkUserRole();
+    </script>
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <header class="navbar">
+        <h1 class="app-title">
+            <i class="fas fa-utensils"></i>
+            家肴集
+        </h1>
+    </header>
+
+    <!-- 搜索栏 -->
+    <div class="search-container">
+        <div class="search-box">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" placeholder="搜索菜品..." id="searchInput" class="search-input">
+        </div>
+    </div>
+
+    <!-- 分类标签 -->
+    <div class="category-tabs" id="categoryTabs">
+        <button class="category-tab active" data-category="all">全部</button>
+        <button class="category-tab" data-category="meat">🥩 肉菜</button>
+        <button class="category-tab" data-category="vegetable">🥬 素菜</button>
+        <button class="category-tab" data-category="soup">🍲 汤品</button>
+        <button class="category-tab" data-category="staple">🍚 主食</button>
+        <button class="category-tab" data-category="snack">🍰 小吃甜点</button>
+    </div>
+
+    <!-- 主内容区域 -->
+    <main class="main-content">
+        <!-- 菜品瀑布流 -->
+        <div class="dish-waterfall" id="dishWaterfall">
+            <!-- 菜品卡片将通过JavaScript动态添加 -->
+        </div>
+
+        <!-- 空状态 -->
+        <div class="empty-state" id="emptyState">
+            <i class="fas fa-plate-wheat empty-icon"></i>
+            <p class="empty-text">还没有菜品，赶紧添加吧！</p>
+        </div>
+    </main>
+
+    <!-- 底部导航栏 -->
+    <nav class="bottom-nav">
+        <div class="nav-item active" id="navHome">
+            <i class="fas fa-home"></i>
+            <span>首页</span>
+        </div>
+        <div class="nav-item" id="navMenu">
+            <i class="fas fa-list"></i>
+            <span>已点菜单</span>
+        </div>
+        <div class="nav-item" id="navManage">
+            <i class="fas fa-utensils"></i>
+            <span>菜品管理</span>
+        </div>
+    </nav>
+
+    <!-- 菜单浮层按钮 -->
+    <button class="menu-fab" id="menuFab">
+        <i class="fas fa-clipboard-list"></i>
+        <span class="menu-fab-badge" id="menuFabBadge">0</span>
+    </button>
+
+    <!-- 待定菜单抽屉遮罩 -->
+    <div class="menu-drawer-overlay" id="menuDrawerOverlay"></div>
+
+    <!-- 待定菜单抽屉 -->
+    <div class="menu-drawer" id="menuDrawer">
+        <div class="menu-drawer-handle">
+            <div class="menu-drawer-handle-bar"></div>
+        </div>
+        
+        <div class="menu-drawer-header">
+            <div class="menu-drawer-stats">
+                <div class="drawer-stat-item">
+                    <span class="drawer-stat-number" id="drawerTotalCount">0</span>
+                    <span class="drawer-stat-label">总菜品</span>
+                </div>
+                <div class="drawer-category-stats">
+                    <div class="drawer-category-stat">
+                        <span class="category-icon">🥩</span>
+                        <span class="category-count" id="drawerMeatCount">0</span>
+                    </div>
+                    <div class="drawer-category-stat">
+                        <span class="category-icon">🥬</span>
+                        <span class="category-count" id="drawerVegetableCount">0</span>
+                    </div>
+                    <div class="drawer-category-stat">
+                        <span class="category-icon">🍲</span>
+                        <span class="category-count" id="drawerSoupCount">0</span>
+                    </div>
+                    <div class="drawer-category-stat">
+                        <span class="category-icon">🍚</span>
+                        <span class="category-count" id="drawerStapleCount">0</span>
+                    </div>
+                    <div class="drawer-category-stat">
+                        <span class="category-icon">🍰</span>
+                        <span class="category-count" id="drawerSnackCount">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-drawer-content" id="menuDrawerContent">
+            <!-- 待定菜单列表 -->
+        </div>
+
+        <div class="menu-drawer-footer" id="menuDrawerFooter" style="display: none;">
+            <button class="confirm-menu-btn" id="confirmMenuBtn">
+                <i class="fas fa-check"></i>
+                确认菜单
+            </button>
+        </div>
+    </div>
+
+    <!-- Toast提示 -->
+    <div class="toast" id="toast"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

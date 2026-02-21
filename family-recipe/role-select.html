@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>选择你的角色 - 家肴集</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .role-select-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #E0F7EF, #F0F9F4);
+        }
+
+        .role-select-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .role-select-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .role-select-subtitle {
+            font-size: 15px;
+            color: #666;
+        }
+
+        .role-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            width: 100%;
+            max-width: 360px;
+        }
+
+        .role-card {
+            background: white;
+            border-radius: 20px;
+            padding: 32px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            border: 3px solid transparent;
+        }
+
+        .role-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            border-color: #E0F7EF;
+        }
+
+        .role-card.selected {
+            border-color: #C8EFE0;
+            background: #F0F9F4;
+        }
+
+        .role-icon {
+            font-size: 48px;
+            color: #88D4B5;
+        }
+
+        .role-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .confirm-role-btn {
+            margin-top: 40px;
+            width: 100%;
+            max-width: 360px;
+            padding: 16px 24px;
+            background: linear-gradient(135deg, #FFB347, #FFD93D);
+            color: #333;
+            border: none;
+            border-radius: 16px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(255, 179, 71, 0.3);
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .confirm-role-btn.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .confirm-role-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(255, 179, 71, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="role-select-container">
+        <div class="role-select-header">
+            <h1 class="role-select-title">
+                <i class="fas fa-utensils"></i>
+                家肴集
+            </h1>
+            <p class="role-select-subtitle">选择你的角色，开始规划美食吧~</p>
+        </div>
+
+        <div class="role-grid" id="roleGrid">
+            <div class="role-card" data-role="dad" data-name="爸爸">
+                <i class="fas fa-user role-icon"></i>
+                <span class="role-name">爸爸</span>
+            </div>
+            <div class="role-card" data-role="mom" data-name="妈妈">
+                <i class="fas fa-user role-icon"></i>
+                <span class="role-name">妈妈</span>
+            </div>
+            <div class="role-card" data-role="child1" data-name="孩子1">
+                <i class="fas fa-child role-icon"></i>
+                <span class="role-name">孩子1</span>
+            </div>
+            <div class="role-card" data-role="child2" data-name="孩子2">
+                <i class="fas fa-child role-icon"></i>
+                <span class="role-name">孩子2</span>
+            </div>
+        </div>
+
+        <button class="confirm-role-btn" id="confirmRoleBtn" disabled>
+            <i class="fas fa-check"></i>
+            确认选择
+        </button>
+    </div>
+
+    <script src="role-select.js"></script>
+</body>
+</html>

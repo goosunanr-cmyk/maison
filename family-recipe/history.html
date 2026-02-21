@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>已点菜单</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        const SUPABASE_URL = 'https://holcjoihioqzjauoewbw.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhvbGNqb2loaW9xemphdW9ld2J3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE2NDkwNTksImV4cCI6MjA4NzIyNTA1OX0.XBnC9Vug155Dmf77CkwhOmwjaaEOA597J-OdMlohTlU';
+        window.db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    </script>
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <header class="navbar">
+        <h1 class="app-title">
+            <i class="fas fa-utensils"></i>
+            已点菜单
+        </h1>
+    </header>
+
+    <!-- 主内容区域 -->
+    <main class="menu-content">
+        <!-- 历史菜单列表 -->
+        <div class="history-list" id="historyList">
+            <!-- 历史菜单将通过JavaScript动态添加 -->
+        </div>
+
+        <!-- 空状态 -->
+        <div class="empty-state" id="emptyState">
+            <i class="fas fa-history empty-icon"></i>
+            <p class="empty-text">还没有确认的菜单记录</p>
+        </div>
+    </main>
+
+    <!-- 底部导航栏 -->
+    <nav class="bottom-nav">
+        <div class="nav-item" id="navHome">
+            <i class="fas fa-home"></i>
+            <span>首页</span>
+        </div>
+        <div class="nav-item active" id="navMenu">
+            <i class="fas fa-list"></i>
+            <span>已点菜单</span>
+        </div>
+        <div class="nav-item" id="navManage">
+            <i class="fas fa-utensils"></i>
+            <span>菜品管理</span>
+        </div>
+    </nav>
+
+    <!-- Toast提示 -->
+    <div class="toast" id="toast"></div>
+
+    <script src="history.js"></script>
+</body>
+</html>
